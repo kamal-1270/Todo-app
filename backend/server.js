@@ -20,4 +20,18 @@ mongoose
 
 app.use("/api", routes);
 
-app.listen(PORT, () => console.log(`Listening at ${PORT}...`));
+function startServer(port) {
+  app.listen(port, () => {
+    console.log(Listening at ${port}...);
+  }).on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      console.error(Port ${port} is already in use. Trying another port...);
+      startServer(port + 1); // Try next port
+    } else {
+      console.error(Error starting server: ${err.message});
+    }
+  });
+}
+
+startServer(DEFAULT_PORT);
+// app.listen(PORT, () => console.log(`Listening at ${PORT}...`));
