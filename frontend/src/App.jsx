@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ToDo from "./components/ToDo";
 import axios from "axios";
-import { baseURL } from "./utils/constant";
+//import { baseURL } from "./utils/constant";
 import Popup from "./components/Popup";
 
 const App = () => {
@@ -13,7 +13,7 @@ const App = () => {
 
   useEffect(() => {
     axios
-      .get(`${baseURL}/get`)
+      .get(`${process.env.baseURL}/get`)
       .then((res) => setToDos(res.data))
       .catch((err) => console.log(err));
   }, [updateUI]);
