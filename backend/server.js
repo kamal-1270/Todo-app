@@ -7,7 +7,8 @@ const routes = require("./routes/ToDoRoutes");
 const cors = require("cors");
 
 const app = express();
-const DEFAULT_PORT = process.env.PORT || 5000;
+//const DEFAULT_PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(express.json());
@@ -20,18 +21,18 @@ mongoose
 
 app.use("/api", routes);
 
-function startServer(port) {
-  app.listen(port, () => {
-    console.log(`Listening at ${port}...`);
-  }).on('error', (err) => {
-    if (err.code === 'EADDRINUSE') {
-      console.error(`Port ${port} is already in use. Trying another port...`);
-      startServer(port + 1); // Try next port
-    } else {
-      console.error(`Error starting server: ${err.message}`);
-    }
-  });
-}
+// function startServer(port) {
+//   app.listen(port, () => {
+//     console.log(`Listening at ${port}...`);
+//   }).on('error', (err) => {
+//     if (err.code === 'EADDRINUSE') {
+//       console.error(`Port ${port} is already in use. Trying another port...`);
+//       startServer(port + 1); // Try next port
+//     } else {
+//       console.error(`Error starting server: ${err.message}`);
+//     }
+//   });
+// }
 
-startServer(DEFAULT_PORT);
-// app.listen(PORT, () => console.log(`Listening at ${PORT}...`));
+// startServer(DEFAULT_PORT);
+app.listen(PORT, () => console.log(`Listening at ${PORT}...`));
